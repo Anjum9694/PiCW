@@ -110,10 +110,14 @@
 // the PPM correction reported by NTP and the actual frequency offset of
 // the crystal. This 2.5 PPM offset is not present in the RPi2 and RPi3.
 // This 2.5 PPM offset is compensated for here, but only for the RPi1.
-#ifdef RPI2
+#ifdef RPI23
 #define F_PLLD_CLK   (500000000.0)
 #else
+#ifdef RPI1
 #define F_PLLD_CLK   (500000000.0*(1-2.500e-6))
+#else
+#error "RPI version macro is not defined"
+#endif
 #endif
 // Empirical value for F_PWM_CLK that produces WSPR symbols that are 'close' to
 // 0.682s long. For some reason, despite the use of DMA, the load on the PI
@@ -121,15 +125,19 @@
 // compensated for in the main loop.
 #define F_PWM_CLK_INIT (31156186.6125761)
 
-// Choose proper base address depending on RPI1/RPI2 setting from makefile.
+// Choose proper base address depending on RPI1/RPI23 macro from makefile.
 // PERI_BASE_PHYS is the base address of the peripherals, in physical
 // address space.
-#ifdef RPI2
+#ifdef RPI23
 #define PERI_BASE_PHYS 0x3f000000
 #define MEM_FLAG 0x04
 #else
+#ifdef RPI1
 #define PERI_BASE_PHYS 0x20000000
 #define MEM_FLAG 0x0c
+#else
+#error "RPI version macro is not defined"
+#endif
 #endif
 
 #define PAGE_SIZE (4*1024)
@@ -1125,12 +1133,6 @@ void morse_table_init(
 
 // Create the mbox special files and open mbox.
 void open_mbox() {
-  unlink(DEVICE_FILE_NAME);
-  unlink(LOCAL_DEVICE_FILE_NAME);
-  if (mknod(DEVICE_FILE_NAME, S_IFCHR|0600, makedev(100, 0)) < 0) {
-    std::cerr << "Failed to create mailbox device." << std::endl;
-    ABORT(-1);
-  }
   mbox.handle = mbox_open();
   if (mbox.handle < 0) {
     std::cerr << "Failed to open mailbox." << std::endl;
@@ -1143,7 +1145,6 @@ void cleanup() {
   disable_clock();
   unSetupDMA();
   deallocMemPool();
-  unlink(DEVICE_FILE_NAME);
   unlink(LOCAL_DEVICE_FILE_NAME);
 }
 
@@ -1207,7 +1208,11 @@ int main(const int argc, char * const argv[]) {
 #ifdef RPI1
   std::cout << "Detected Raspberry Pi version 1" << std::endl;
 #else
+#ifdef RPI23
   std::cout << "Detected Raspberry Pi version 2/3" << std::endl;
+#else
+#error "RPI version macro is not defined"
+#endif
 #endif
 
   // Parse arguments
