@@ -1,5 +1,9 @@
 prefix=/usr/local
 
+CFLAGS += -Wall
+CXXFLAGS += -D_GLIBCXX_DEBUG -std=c++11 -Wall -Werror -Wno-psabi
+LDLIBS += -lm -latomic
+
 ifeq ($(findstring armv6,$(shell uname -m)),armv6)
 # Broadcom BCM2835 SoC with 700 MHz 32-bit ARM 1176JZF-S (ARMv6 arch)
 PI_VERSION = -DRPI1
@@ -12,13 +16,13 @@ endif
 all: PiCW
 
 mailbox.o: mailbox.c mailbox.h
-	g++ -c -Wall -lm mailbox.c
+	$(CC) $(CFLAGS) -c mailbox.c
 
 PiCW: PiCW.cpp mailbox.o mailbox.h
-	g++ -D_GLIBCXX_DEBUG -std=c++11 -Wall -Werror -Wno-psabi -fmax-errors=5 -latomic -lm $(PI_VERSION) mailbox.o PiCW.cpp -pthread -oPiCW
+	$(CXX) $(CXXFLAGS) $(LDLIBS) $(PI_VERSION) -pthread mailbox.o PiCW.cpp -o PiCW
 
 clean:
-	-rm -f PiCW PiCW.o mailbox.o
+	-rm -f PiCW *.o
 
 .PHONY: install
 install: PiCW

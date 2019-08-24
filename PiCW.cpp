@@ -50,7 +50,9 @@
 #include <iomanip>
 #include <sys/timex.h>
 
+extern "C" {
 #include "mailbox.h"
+}
 
 // Note on accessing memory in RPi:
 //
