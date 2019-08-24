@@ -15,7 +15,7 @@ mailbox.o: mailbox.c mailbox.h
 	g++ -c -Wall -lm mailbox.c
 
 PiCW: PiCW.cpp mailbox.o mailbox.h
-	g++ -D_GLIBCXX_DEBUG -std=c++11 -Wall -Werror -fmax-errors=5 -lm $(PI_VERSION) mailbox.o PiCW.cpp -pthread -oPiCW
+	g++ -D_GLIBCXX_DEBUG -std=c++11 -Wall -Werror -Wno-psabi -fmax-errors=5 -latomic -lm $(PI_VERSION) mailbox.o PiCW.cpp -pthread -oPiCW
 
 clean:
 	-rm -f PiCW PiCW.o mailbox.o
