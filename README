@@ -6,7 +6,7 @@ to 250 MHz.
 
 Compatible with the original Raspberry Pi, the Raspberry Pi 2/3, and
 the Pi Zero.
-(Confirmed working on 3B+ buster debian) 
+(Confirmed working on 3B+ buster debian, set NTP calibration off and use ppm offset) -Anjum9694
 
 ******
 Installation / update:
