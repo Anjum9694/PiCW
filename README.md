@@ -1,5 +1,5 @@
 ## Raspberry Pi bareback LF/MF/HF/VHF CW (Morse code) transmitter
-###### Python Terminal User Interface by Anjum9694. 
+###### I have a working interface created for easily sending morse code. Mail me at anjum9694@gmail.com for more info. 
 
 
 **Makes a very simple Morse Code transmitter from your RasberryPi by connecting
