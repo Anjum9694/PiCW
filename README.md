@@ -2,13 +2,13 @@
 ###### Python Terminal User Interface by Anjum9694. 
 
 
-Makes a very simple Morse Code transmitter from your RasberryPi by connecting
+**Makes a very simple Morse Code transmitter from your RasberryPi by connecting
 GPIO port 4 to Antenna (and LPF). Operates on LF, MF, HF and VHF bands from 0
-to 250 MHz.
+to 250 MHz.**
 
 Compatible with the original Raspberry Pi, the Raspberry Pi 2/3, and
 the Pi Zero.
-(Confirmed working on 3B+ buster debian, set NTP calibration off and use ppm offset) -Anjum9694
+>Confirmed working on 3B+ buster debian, set NTP calibration off and use ppm offset -Anjum9694
 
 ******
 Installation / update:
