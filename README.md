@@ -1,14 +1,14 @@
 ## Raspberry Pi bareback LF/MF/HF/VHF CW (Morse code) transmitter
-###### I have a working interface created for easily sending morse code. Mail me at anjum9694@gmail.com for more info. 
-
-
 **Makes a very simple Morse Code transmitter from your RasberryPi by connecting
 GPIO port 4 to Antenna (and LPF). Operates on LF, MF, HF and VHF bands from 0
 to 250 MHz.**
 
-Compatible with the original Raspberry Pi, the Raspberry Pi 2/3, and
-the Pi Zero.
->Confirmed working on 3B+ buster debian, set NTP calibration off and use ppm offset -Anjum9694
+
+###### I have a working interface created for easily sending morse code. Mail me at anjum9694@gmail.com for more info. 
+
+***Compatible with the original Raspberry Pi, the Raspberry Pi 2/3, and
+the Pi Zero.***
+>Confirmed working on 3B+ buster debian, set NTP calibration off and use ppm offset.
 
 ******
 Installation / update:
